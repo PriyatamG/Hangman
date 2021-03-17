@@ -25,7 +25,7 @@ def guess(wordL, g):
 
 
 
-database = sql.connect(host = "localhost", user = "root", passwd = "MR203@$a", database = "Hangman")
+database = sql.connect(host = "localhost", user = "root", passwd = "", database = "Hangman")
 
 if database.is_connected():
     print("Succesfully connected")
