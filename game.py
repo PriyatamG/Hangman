@@ -1,6 +1,5 @@
 import mysql.connector as sql
 import random
-import time
 
 
 def canvas1(word):
@@ -35,14 +34,13 @@ cursor = database.cursor()
 Name = input("Enter your name")
 
 print('\n\n', "HELLO", Name, "Do you think you can win me ? HAHAHA.... Try answering but don't expect to get them all !")
-time.sleep(4)
-
 
 streak = True
 score = 0
+randint = 1
 while streak == True:
 
-    randint = random.randint(1,10)
+    
     query = "SELECT Answer, Riddle FROM main WHERE ID = " + str(randint)
 
     cursor.execute(query)
@@ -70,6 +68,9 @@ while streak == True:
         elif g == word:
             print("CORRECT\n\n")
             score+=1
+            if randint == 10:
+                print("YOU WON !!!")
+                streak = False
             break
         else:
             print("INCORRECT")
@@ -78,11 +79,17 @@ while streak == True:
         if canvas == list(word):
             print("Correct\n\n")
             score += 1
+            if randint == 10:
+                print("YOU WON !!!")
+                streak = False
             break
     else:
         print("The word is:-- ", word)
         print("Your score is", score,"\n\n")
         streak = False
+    randint += 1
+   
+    
 
 
 query2 = "INSERT INTO leaderboard (Name, Score) values('"+ Name+"'," +str(score)+")"
